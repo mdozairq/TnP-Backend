@@ -17,6 +17,10 @@ app.use(cors());
 
 
 app.use('/admin', adminRoutes);
+
+app.get('/', (req, res)=>{
+    res.send("All API for TPO GCE");
+})
 const PORT = process.env.PORT || 5000;
 
 mongoose.connect(process.env.CONNECTION_URL, {useNewUrlParser: true, useUnifiedTopology: true})
