@@ -8,12 +8,12 @@ const secret = process.env.SECRET;
 
 export const signin = async (req, res) => {
     const { email, password } = req.body;
-    const Admin = [{email: process.env.ADMIN_EMAIL, password: process.env.ADMIN_PASSWORD}]
+    const Admin = [{_id:process.env.ADMIN_ID, email: process.env.ADMIN_EMAIL, password: process.env.ADMIN_PASSWORD}]
     // console.log(email, password);
     // console.log("EP", Admin[0].email, Admin[0].password)
     try {
       const admin = await Admin.find(u => u.email === email );
-    //   console.log("Found: ",admin);
+      console.log("Found: ",admin);
       if (!admin) return res.status(404).json({ message: "User doesn't exist" });
   
       const isPasswordCorrect = await bcrypt.compare(password, admin.password);
@@ -32,3 +32,4 @@ export const signin = async (req, res) => {
 export const postHero = (req, res)=>{
     res.send("I am Admin, Here");
 }
+
