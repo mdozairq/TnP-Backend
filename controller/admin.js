@@ -22,10 +22,10 @@ export const signin = async (req, res) => {
   
       const token = jwt.sign({ email: admin.email, id: admin._id }, secret, { expiresIn: "1h" });
   
-      res.status(200).json({ result: admin, token });
+      res.status(200).json({ success: true, result: admin, token });
     } catch (err) {
         console.log(err);
-      res.status(500).json({ message: "Something went wrong" });
+      res.status(500).json({ success: false, message: "Something went wrong" });
     }
   };
   
