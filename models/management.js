@@ -14,7 +14,7 @@ const managementSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    description:{
+    desc:{
         type: String,
     },
     message:{
@@ -29,11 +29,8 @@ const managementSchema = mongoose.Schema({
     },
     linkedIn:{
         type: String,
-    },
-    Social:[{
-        type: String,
-    }],   
+    },   
 }, { timestamps: true })
 
-const management = mongoose.model('banner', managementSchema);
+const management = mongoose.model('management', managementSchema);
 export default management;
