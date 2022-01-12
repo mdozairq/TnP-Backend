@@ -1,10 +1,8 @@
 import mongoose from 'mongoose';
 
 const managementSchema = mongoose.Schema({
-    img:
-    {
-        data: Buffer,
-        contentType: String
+    img:{
+        type:String,
     },
     name:{
         type: String,

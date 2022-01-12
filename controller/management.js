@@ -15,20 +15,8 @@ export const getManagenent = async (req, res) => {
 
 export const addManagement = async(req, res) => {
     console.log(req.body);
-    const newManagement = new management({
-        img:{
-            data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
-            contentType: 'image/png'
-        },
-        name:req.body.name,
-        position: req.body.position,
-        desc: req.body.desc,
-        message: req.body.message,
-        email: req.body.email,
-        phone: req.body.phone,
-        linkedIn: req.body.linkedIn,    
-    })
-
+    const managementData = req.body;
+    const newManagement = new management({...managementData});
     try {
         await newManagement.save();
         res.status(201).json(newManagement);
