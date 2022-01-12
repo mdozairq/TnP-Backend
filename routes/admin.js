@@ -19,8 +19,8 @@ router.patch('/management/:id', auth, updateManagement);
 router.delete('/management/:id', auth, deleteManagement);
 router.get('/placement', getPlacement);
 router.post('/placement', auth, createPlacement);
-router.patch('/placement', auth, updatePlacement);
-router.delete('/placement', auth, deletePlacement);
+router.patch('/placement/:id', auth, updatePlacement);
+router.delete('/placement/:id', auth, deletePlacement);
 
 
 export default router; 
