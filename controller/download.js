@@ -29,7 +29,7 @@ export const createDownload = async (req, res, next) => {
             uuid: uid,
             path: req.file.path,
             size: req.file.size,
-            fileLink: `${process.env.APP_BASE_URL}/download/files/${uid}`
+            fileLink: `${process.env.APP_BASE_URL}/admin/download/files/${uid}`
         });
         const response = await file.save();
         res.status(201).json(response);
