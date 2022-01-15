@@ -24,7 +24,7 @@ router.patch('/placement/:id', auth, updatePlacement);
 router.delete('/placement/:id', auth, deletePlacement);
 router.get('/download', getDowload);
 router.post('/download', auth, upload.single('file'), createDownload);
-router.post('/download/id', auth,  deleteDownload);
+router.delete('/download/id', auth,  deleteDownload);
 router.get('/download/files/:uid', fileDownload);
 
 

@@ -1,5 +1,5 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
+.env
 uploads/*
 !uploads/.gitkeep
 # dependencies
@@ -14,7 +14,7 @@ uploads/*
 /build
 
 # misc
-.env
+
 .DS_Store
 .env.local
 .env.development.local

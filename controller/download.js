@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import { v4 as uuidv4 } from "uuid";
 import path from "path"
 const __dirname = path.resolve();
+import fs from 'fs'
 
 
 dotenv.config();
@@ -36,25 +37,35 @@ export const createDownload = async (req, res, next) => {
         res.status(201).json(response);
     } catch (error) {
         console.log(error);
-        res.status(409).json({message: error.message});
+        res.status(409).json({ message: error.message });
     }
 }
 
-export const deleteDownload = async(req, res) => {
-    const {id} = req.params;
+export const deleteDownload = async (req, res) => {
+    const { id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
-    await downloads.findByIdAndRemove(id);
-    res.json({message: 'Post Deleted Successfully'})
+    else {
+        const file = await downloads.findById(id);
+        try {
+            fs.unlinkSync(file.path);
+            await downloads.findByIdAndRemove(id);
+            res.json({ message: 'File Deleted Successfully' })
+        }
+        catch(err){
+            res.json({err: err.message});
+        }        
+    }
 }
 
-export const fileDownload = async(req, res) =>{
+export const fileDownload = async (req, res) => {
     const file = await downloads.findOne({ uuid: req.params.uid });
-   // Link expired
-   if(!file) {
+    // Link expired
+    if (!file) {
         return res.send('Link has been expired.');
-   } 
-   const response = await file.save();
-   const filePath = `${__dirname}/./${file.path}`;
-   res.download(filePath);
+    }
+    const response = await file.save();
+    const filePath = `${__dirname}/./${file.path}`;
+    console.log(filePath);
+    res.download(filePath);
 }
 
