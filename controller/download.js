@@ -1,15 +1,16 @@
 import mongoose from "mongoose";
-import download from "../models/download.js"
+import downloads from "../models/download.js"
 import dotenv from "dotenv";
 import { v4 as uuidv4 } from "uuid";
-
+import path from "path"
+const __dirname = path.resolve();
 
 
 dotenv.config();
 
 export const getDowload = async (req, res) => {
     try {
-        const allDownload = await download.find();
+        const allDownload = await downloads.find();
         res.status(200).json(allDownload);
     }
     catch (err) {
@@ -42,18 +43,18 @@ export const createDownload = async (req, res, next) => {
 export const deleteDownload = async(req, res) => {
     const {id} = req.params;
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
-    await download.findByIdAndRemove(id);
+    await downloads.findByIdAndRemove(id);
     res.json({message: 'Post Deleted Successfully'})
 }
 
 export const fileDownload = async(req, res) =>{
-    const file = await File.findOne({ uuid: req.params.uid });
+    const file = await downloads.findOne({ uuid: req.params.uid });
    // Link expired
    if(!file) {
         return res.send('Link has been expired.');
    } 
    const response = await file.save();
-   const filePath = `${__dirname}/../${file.path}`;
+   const filePath = `${__dirname}/./${file.path}`;
    res.download(filePath);
 }
 
