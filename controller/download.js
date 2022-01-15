@@ -23,7 +23,7 @@ export const getDowload = async (req, res) => {
 export const createDownload = async (req, res, next) => {
     try {
         const uid = uuidv4();
-        const file = new download({
+        const file = new downloads({
             name: req.body.name,
             category: req.body.category,
             filename: req.file.filename,

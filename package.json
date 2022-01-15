@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "type": "module",
+  "proxy": "https://tpogce.herokuapp.com/admin",
   "scripts": {
     "start": "node index.js"
   },
