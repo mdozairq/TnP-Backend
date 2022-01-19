@@ -44,17 +44,17 @@ export const createDownload = async (req, res, next) => {
 export const deleteDownload = async (req, res) => {
     const { id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
-    else {
-        const file = await downloads.findById(id);
+    // else {
+        // const file = await downloads.findById(id);
         try {
-            fs.unlinkSync(file.path);
+        //     fs.unlinkSync(file.path);
             await downloads.findByIdAndRemove(id);
             res.json({ message: 'File Deleted Successfully' })
         }
         catch(err){
             res.json({err: err.message});
         }        
-    }
+    // }
 }
 
 export const fileDownload = async (req, res) => {
