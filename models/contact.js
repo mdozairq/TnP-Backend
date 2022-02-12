@@ -22,6 +22,18 @@ const contactSchema = mongoose.Schema({
     address:{
         type: String,
     },
+    linkedIn:{
+        type: String,
+    },
+    facebook:{
+        type: String,
+    },
+    insta:{
+        type: String,
+    },
+    twitter:{
+        type: String
+    },
 },{ timestamps: true })
 
 const contact = mongoose.model('contact', contactSchema);
