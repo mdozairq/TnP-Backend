@@ -1,6 +1,7 @@
 import express from "express";
 // import { route } from "express/lib/application";
 import { postHero, signin } from "../controller/admin.js";
+import { announcementDownload, createAnnouncement, deleteAnnouncement, getAnnouncement } from "../controller/announcement.js";
 import { createBanner, deleteBanner, getBanner } from "../controller/banner.js";
 import { createContact, deleteContact, getContact, updateContact } from "../controller/contact.js";
 import { createDownload, deleteDownload, fileDownload, getDowload } from "../controller/download.js";
@@ -35,6 +36,10 @@ router.get('/contact', getContact);
 router.post('/contact', auth, createContact);
 router.patch('/contact/:id', auth, updateContact);
 router.delete('/contact/:id', auth, deleteContact);
+router.get('/announcement', getAnnouncement);
+router.post('/announcement', auth, upload.single('file'), createAnnouncement);
+router.delete('/announcement/:id', auth,  deleteAnnouncement);
+router.get('/announcement/files/:uid', announcementDownload);
 
 
 export default router; 
